@@ -1,9 +1,17 @@
 services: 
-  app: 
+
+  backend:
     build: 
-      context: ./static
+      context: ./backend
+      dockerfile: backend_Dockerfile
+    ports:
+      - "8080:8000"
+    command: uvicorn main:app --host 0.0.0.0  --port 8000
+  static_html:
+    build: 
+      context: ./static_html
       dockerfile: Dockerfile
-    image: python:latest
     ports:
       - "8000:8000"
     command: python -m http.server 8000
+
