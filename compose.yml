@@ -1,0 +1,9 @@
+services: 
+  app: 
+    build: 
+      context: ./static
+      dockerfile: Dockerfile
+    image: python:latest
+    ports:
+      - "8000:8000"
+    command: python -m http.server 8000
