@@ -1,12 +1,24 @@
 services: 
-
   backend:
+
     build: 
       context: ./backend
       dockerfile: backend_Dockerfile
     ports:
       - "8080:8000"
-    command: uvicorn main:app --host 0.0.0.0  --port 8000
+    command: uvicorn main:app --host 0.0.0.0  --port 8000 --reload
+
+    environment:
+      - MY_PROJECT=This is my project
+      - PORT=8000
+
+    develop:
+      watch:
+       - action: rebuild
+         path: backend/backend_Dockerfile
+       - action: sync
+         path: backend/src
+         target: /app
   static_html:
     build: 
       context: ./static_html
