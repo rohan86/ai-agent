@@ -11,6 +11,8 @@ services:
     environment:
       - MY_PROJECT=This is my project
       - PORT=8000
+    env_file:
+      - .env.sample
 
     develop:
       watch:
@@ -19,6 +21,20 @@ services:
        - action: sync
          path: backend/src
          target: /app
+  
+  db_service:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    # env_file:
+    #   - .env_db
+    environment:
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=db_pass
+      - POSTGRES_DB=mydb
+    volumes:
+      - dc_man_db_vol:/var/lib/postgresql/data
+
   static_html:
     build: 
       context: ./static_html
@@ -27,3 +43,5 @@ services:
       - "8000:8000"
     command: python -m http.server 8000
 
+volumes:
+   dc_man_db_vol: 
