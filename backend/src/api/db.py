@@ -2,7 +2,12 @@ import os
 import sqlmodel 
 from sqlmodel import Session,SQLModel
 
-DATABASE_URL=os.environ.get("DATABASE_URL")
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL=os.getenv("DATABASE_URL")
+print(DATABASE_URL)
 
 if DATABASE_URL == "" :
     raise NotImplementedError("`Database_URL` needs to be set ")

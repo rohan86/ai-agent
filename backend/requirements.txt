@@ -1,5 +1,8 @@
 fastapi==0.116.1
+dotenv
 uvicorn[standard]
 requests 
 sqlmodel
 psycopg[binary]
+langchain
+langchain_openai
